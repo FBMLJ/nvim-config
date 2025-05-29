@@ -40,3 +40,10 @@ vim.keymap.set('n', '<Leader>e', ':NvimTreeToggle<CR>', { silent = true, desc = 
 
 -- Mapeamento para focar no arquivo atual no NvimTree (abre se fechado)
 vim.keymap.set('n', '<Leader>nf', ':NvimTreeFindFile<CR>', { silent = true, desc = "Encontrar arquivo atual no NvimTree" })
+
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
