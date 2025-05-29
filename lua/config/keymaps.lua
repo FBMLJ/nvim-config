@@ -1,0 +1,42 @@
+-- Importando codigo proprios
+--require("config.helper.terminal")
+-- ~/.config/nvim/init.lua
+
+vim.keymap.set('n', '<Leader>t', ':botright split | terminal<CR>', { silent = true, desc = "Abrir novo terminal horizontal na parte de baixo" })
+
+vim.keymap.set('n', '<Leader>tc', '<C-w>c', { silent = true, desc = "Fechar a janela do terminal" })
+-- Navegação entre janelas com Ctrl + h/j/k/l
+-- Isso é MUITO comum e recomendado para quem não usa tmux/terminal multiplexer com os mesmos atalhos
+vim.keymap.set('n', '<C-h>', '<C-w>h', { silent = true, desc = "Mover para janela à esquerda" })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { silent = true, desc = "Mover para janela abaixo" })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { silent = true, desc = "Mover para janela acima" })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { silent = true, desc = "Mover para janela à direita" })
+
+-- Redimensionar janelas com a Leader Key (ou outra combinação)
+-- Supondo que sua leader key seja <Space>
+-- vim.g.mapleader = ' ' -- Defina sua leader key se ainda não o fez
+
+vim.keymap.set('n', '<Leader>=', '<C-w>=', { silent = true, desc = "Equalizar tamanhos das janelas" })
+vim.keymap.set('n', '<Leader>+', '<C-w>+', { silent = true, desc = "Aumentar altura da janela" })
+vim.keymap.set('n', '<Leader>-', '<C-w>-', { silent = true, desc = "Diminuir altura da janela" })
+vim.keymap.set('n', '<Leader><', '<C-w><', { silent = true, desc = "Diminuir largura da janela" })
+vim.keymap.set('n', '<Leader>>', '<C-w>>', { silent = true, desc = "Aumentar largura da janela" })
+
+-- Fechar janela atual
+vim.keymap.set('n', '<Leader>c', '<C-w>c', { silent = true, desc = "Fechar janela atual" })
+-- Fechar todas as outras janelas
+vim.keymap.set('n', '<Leader>o', '<C-w>o', { silent = true, desc = "Manter apenas a janela atual" })
+
+-- Abrir nova split (horizontal ou vertical)
+vim.keymap.set('n', '<Leader>sv', ':vsplit<CR>', { silent = true, desc = "Dividir janela verticalmente" })
+vim.keymap.set('n', '<Leader>sh', ':split<CR>', { silent = true, desc = "Dividir janela horizontalmente" })
+
+
+
+
+
+-- Mapeamento para alternar a visibilidade do nvim-tree
+vim.keymap.set('n', '<Leader>e', ':NvimTreeToggle<CR>', { silent = true, desc = "Alternar NvimTree" })
+
+-- Mapeamento para focar no arquivo atual no NvimTree (abre se fechado)
+vim.keymap.set('n', '<Leader>nf', ':NvimTreeFindFile<CR>', { silent = true, desc = "Encontrar arquivo atual no NvimTree" })

@@ -6,7 +6,9 @@ vim.o.shell = "/bin/bash"
 vim.o.fileencodings="utf-8"
 
 
+vim.opt.clipboard = 'unnamedplus'
+
+
 
 require("config.lazy")
 require("config.keymaps")
-
