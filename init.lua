@@ -14,5 +14,12 @@ vim.opt.tabstop = 4             -- Tamanho do "tab" (visual)
 vim.opt.shiftwidth = 4          -- Tamanho da indentação (<< e >>)
 vim.opt.expandtab = true        -- Usa espaços ao invés de tabs
 
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})
 require("config.lazy")
 require("config.keymaps")
