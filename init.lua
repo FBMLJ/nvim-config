@@ -5,9 +5,8 @@ vim.o.bomb = false
 vim.o.shell = "/bin/bash"
 vim.o.fileencodings="utf-8"
 
-
+vim.opt.number = true
 vim.opt.clipboard = 'unnamedplus'
-
 
 
 require("config.lazy")
