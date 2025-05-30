@@ -23,3 +23,8 @@ vim.diagnostic.config({
 })
 require("config.lazy")
 require("config.keymaps")
+
+vim.opt.termguicolors = true
+vim.cmd [[highlight Normal guibg=NONE ctermbg=NONE]]
+vim.cmd [[highlight NormalNC guibg=NONE ctermbg=NONE]]
+
