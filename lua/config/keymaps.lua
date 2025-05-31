@@ -1,10 +1,21 @@
--- Importando codigo proprios
---require("config.helper.terminal")
--- ~/.config/nvim/init.lua
 
-vim.keymap.set('n', '<Leader>t', ':botright split | terminal<CR>', { silent = true, desc = "Abrir novo terminal horizontal na parte de baixo" })
+-- Definição de grupos que aparece no which-key
+local wk = require("which-key")
+wk.add({
+    {"<leader>p", group = "LSP/Código"},
+    {"<leader>r", group="Refatoração"},
+    {"<leader>g", group="Git"},
+    {"<leader>f",group = "Busca"},
+    {"<leader>n", group= "Navegação"},
+    {"<leader>d",group= "Run/Debug"},
+    {"<leader>t", group="Terminal"},
+    {"<leader>s", group="Split Tela"}
+})
 
-vim.keymap.set('n', '<Leader>tc', '<C-w>c', { silent = true, desc = "Fechar a janela do terminal" })
+
+
+
+
 -- Navegação entre janelas com Ctrl + h/j/k/l
 -- Isso é MUITO comum e recomendado para quem não usa tmux/terminal multiplexer com os mesmos atalhos
 vim.keymap.set('n', '<C-h>', '<C-w>h', { silent = true, desc = "Mover para janela à esquerda" })
@@ -14,8 +25,7 @@ vim.keymap.set('n', '<C-l>', '<C-w>l', { silent = true, desc = "Mover para janel
 
 -- Redimensionar janelas com a Leader Key (ou outra combinação)
 -- Supondo que sua leader key seja <Space>
--- vim.g.mapleader = ' ' -- Defina sua leader key se ainda não o fez
-
+-- TODO: refazer essas configurações
 vim.keymap.set('n', '<Leader>=', '<C-w>=', { silent = true, desc = "Equalizar tamanhos das janelas" })
 vim.keymap.set('n', '<Leader>+', '<C-w>+', { silent = true, desc = "Aumentar altura da janela" })
 vim.keymap.set('n', '<Leader>-', '<C-w>-', { silent = true, desc = "Diminuir altura da janela" })
@@ -23,9 +33,9 @@ vim.keymap.set('n', '<Leader><', '<C-w><', { silent = true, desc = "Diminuir lar
 vim.keymap.set('n', '<Leader>>', '<C-w>>', { silent = true, desc = "Aumentar largura da janela" })
 
 -- Fechar janela atual
-vim.keymap.set('n', '<Leader>c', '<C-w>c', { silent = true, desc = "Fechar janela atual" })
+vim.keymap.set('n', '<Leader>nc', '<C-w>c', { silent = true, desc = "Fechar janela atual" })
 -- Fechar todas as outras janelas
-vim.keymap.set('n', '<Leader>o', '<C-w>o', { silent = true, desc = "Manter apenas a janela atual" })
+vim.keymap.set('n', '<Leader>no', '<C-w>o', { silent = true, desc = "Manter apenas a janela atual" })
 
 -- Abrir nova split (horizontal ou vertical)
 vim.keymap.set('n', '<Leader>sv', ':vsplit<CR>', { silent = true, desc = "Dividir janela verticalmente" })
@@ -36,7 +46,7 @@ vim.keymap.set('n', '<Leader>sh', ':split<CR>', { silent = true, desc = "Dividir
 
 
 -- Mapeamento para alternar a visibilidade do nvim-tree
-vim.keymap.set('n', '<Leader>e', ':NvimTreeToggle<CR>', { silent = true, desc = "Alternar NvimTree" })
+vim.keymap.set('n', '<Leader>nt', ':NvimTreeToggle<CR>', { silent = true, desc = "Alternar NvimTree" })
 
 -- Mapeamento para focar no arquivo atual no NvimTree (abre se fechado)
 vim.keymap.set('n', '<Leader>nf', ':NvimTreeFindFile<CR>', { silent = true, desc = "Encontrar arquivo atual no NvimTree" })
@@ -47,3 +57,13 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find f
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<leader>ft', ':TodoTelescope<CR>', {desc = "Telescope encontrar TODOs"})
+
+
+
+local lspconfig = require("lspconfig")
+
+vim.keymap.set("n", "<leader>pd", vim.lsp.buf.hover, {desc = "Mostrar definição"})
+vim.keymap.set("n", "<leader>pf", vim.lsp.buf.format, {desc = "Formatar"})
+
+vim.keymap.set("n", "<leader>rs", vim.lsp.buf.rename, {desc = "Renomeia simbolo"})
