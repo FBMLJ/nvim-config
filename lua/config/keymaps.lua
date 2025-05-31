@@ -1,5 +1,6 @@
 
 -- Definição de grupos que aparece no which-key
+--
 local wk = require("which-key")
 wk.add({
     {"<leader>p", group = "LSP/Código"},
@@ -14,7 +15,7 @@ wk.add({
 
 
 
-
+--Leader atalhos
 
 -- Navegação entre janelas com Ctrl + h/j/k/l
 -- Isso é MUITO comum e recomendado para quem não usa tmux/terminal multiplexer com os mesmos atalhos
@@ -65,5 +66,25 @@ local lspconfig = require("lspconfig")
 
 vim.keymap.set("n", "<leader>pd", vim.lsp.buf.hover, {desc = "Mostrar definição"})
 vim.keymap.set("n", "<leader>pf", vim.lsp.buf.format, {desc = "Formatar"})
-
 vim.keymap.set("n", "<leader>rs", vim.lsp.buf.rename, {desc = "Renomeia simbolo"})
+
+local dap = require("dap")
+local dapui= require("dapui")
+vim.keymap.set("n","<leader>do",dapui.toggle, {desc = "Exibir/Ocultar Menu Debug"})
+vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, {desc = "Adicionar/Remover breakpoint"})
+vim.keymap.set("n","<leader>dc", dap.continue, {desc = "Continue debug"} )
+vim.keymap.set("n", "<leader>ds", dap.step_over, {desc = "Step Over"})
+
+
+
+vim.keymap.set("n", "<C-p>", builtin.find_files)
+-- Atalho Ctrl
+--
+
+local api = require("Comment.api")
+
+
+-- Modo visual: comenta seleção
+vim.keymap.set("v", "<C-/>", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", { desc = "Comentar seleção", silent = true })
+vim.keymap.set("n", "<C-/>", api.toggle.linewise.current, { desc = "Comentar linha", silent = true })
+
