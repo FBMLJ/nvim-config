@@ -23,6 +23,7 @@ vim.diagnostic.config({
 })
 require("config.lazy")
 require("config.keymaps")
+require("custom.local_config")
 --Linhas para habilitar transparencia dentro do container
 vim.opt.termguicolors = true
 vim.cmd [[highlight Normal guibg=NONE ctermbg=NONE]]
