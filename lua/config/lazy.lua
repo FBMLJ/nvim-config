@@ -1,13 +1,12 @@
--- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     local lazyrepo = "https://github.com/folke/lazy.nvim.git"
     local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
     if vim.v.shell_error ~= 0 then
         vim.api.nvim_echo({
-            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-            { out, "WarningMsg" },
-            { "\nPress any key to exit..." },
+            { "failed to clone lazy.nvim:\n", "errormsg" },
+            { out, "warningmsg" },
+            { "\npress any key to exit..." },
         }, true, {})
         vim.fn.getchar()
         os.exit(1)
@@ -15,21 +14,33 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- Setup lazy.nvim
-require("lazy").setup({
-    spec = {
-        -- import your plugins
-        { import = "plugins" },
-    },
-    -- Configure any other settings here. See the documentation for more details.
-    -- colorscheme that will be used when installing plugins.
+local function load_project_plugins(dirname, filename)
+    local project_plugins_table = {}
+    local full_dir_path = vim.fn.getcwd() .. "/" .. dirname
+    local full_file_path = full_dir_path .. "/" .. filename
+
+    if vim.fn.isdirectory(full_dir_path) == 1 then
+        if vim.fn.filereadable(full_file_path) then
+            local success, loaded_content = pcall(dofile, full_file_path)
+            if success and type(loaded_content) == "table" then
+                project_plugins_table = loaded_content
+            end
+        end
+    end
+    return project_plugins_table
+end
+
+local project_specific_plugins = load_project_plugins(".lua/", "plugins.lua")
+
+local final_specs = {
+    { import = "plugins" },
+    project_specific_plugins,
+}
+
+require("lazy").setup(final_specs, {
     install = { colorscheme = { "habamax" } },
-    -- automatically check for plugin updates
     checker = { enabled = true },
 })
