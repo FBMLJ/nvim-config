@@ -9,7 +9,7 @@ wk.add({
     {"<leader>f",group = "Busca"},
     {"<leader>n", group= "Navegação"},
     {"<leader>d",group= "Run/Debug"},
-    {"<leader>t", group="Terminal"},
+    {"<leader>t", group="Testes"},
     {"<leader>s", group="Split Tela"}
 })
 
@@ -88,3 +88,26 @@ local api = require("Comment.api")
 vim.keymap.set("v", "<C-/>", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", { desc = "Comentar seleção", silent = true })
 vim.keymap.set("n", "<C-/>", api.toggle.linewise.current, { desc = "Comentar linha", silent = true })
 
+
+
+-- Ações de codigo
+
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+vim.keymap.set("n", "<leader>cr", vim.lsp.buf.references, {desc="Mostrar suas referências"})
+vim.keymap.set("n", "<leader>ci", vim.lsp.buf.implementation, {desc="Mostrar suas referências"})
+vim.keymap.set("n", "<leader>cl", vim.diagnostic.open_float, {desc="Mostrar suas referências"})
+-- vim.api.nvim_set_keymap("n", "<leader>cr", vim.lsp.buf.refereces, {desc="Mostrar suas referências"})
+-- vim.api.nvim_set_keymap("n", "<leader>cr", vim.lsp.buf.refereces, {desc="Mostrar suas referências"})
+
+
+local opts = { noremap = true, silent = true }
+
+vim.api.nvim_set_keymap("n", "<leader>tn", ":TestNearest<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>tf", ":TestFile<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>ts", ":TestSuite<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>tl", ":TestLast<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>tv", ":TestVisit<CR>", opts)
+-- atalhos teclados
+vim.keymap.set("n","<A-h>",":bp<CR>")
+vim.keymap.set("n","<A-l>",":bn<CR>")
+vim.keymap.set("n","<A-d>",":bd<CR>")
